@@ -5,7 +5,9 @@
 using namespace std;
 
 int priority(char operation) {
-    if (operation == '~' || operation == 's' || operation == 'c')
+    if (operation == 's' || operation == 'c')
+        return 5;
+    else if (operation == '~')
         return 4;
     else if (operation == '^')
         return 3;
@@ -14,7 +16,7 @@ int priority(char operation) {
     else if (operation == '+' || operation == '-')
         return 1;
     else
-        return -1;  //ƒл€ sin, cos и скобок
+        return -1;
 }
 
 template <typename any>
@@ -183,7 +185,7 @@ float calculatePolishNotation(string PolishNotation) {
 
 int main() {
     setlocale(LC_ALL, "Russian");
-    //string commonExpression = "5+(3*(-5))/(sin(5)^cos(5))"
+    //string commonExpression = "5+(3*(-5))/(sin(5)^cos(5))" 2^2^3
     cout << "¬ведите запись в стандартной форме: ";
     string commonExpression;
     cin >> commonExpression;

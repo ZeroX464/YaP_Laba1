@@ -60,8 +60,15 @@ string toPolishNotation(const string commonExpression) {
             operationStack.push('~'); // Унарный минус
         }
         else if (contains(operationsSymbols, size(operationsSymbols), ch)) { //Операция
-            while (!operationStack.empty() && priority(ch) <= priority(operationStack.top())) { //Если приоритет операции ниже, чем в стеке, то операции из стека заносятся в запись
-                putTopFromStackToNotation();
+            if (ch == '^') { // ^ - правоассоциативная операция
+                while (!operationStack.empty() && priority(ch) < priority(operationStack.top())) {
+                    putTopFromStackToNotation();
+                }
+            }
+            else {
+                while (!operationStack.empty() && priority(ch) <= priority(operationStack.top())) { // Если приоритет операции ниже или равен приоритету операции в стеке, то операции из стека заносятся в запись
+                    putTopFromStackToNotation();
+                }
             }
             operationStack.push(ch);
             if (ch == 's' || ch == 'c') { i += 2; } // Пропуск 2 символов для sin, cos

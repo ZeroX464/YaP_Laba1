@@ -40,9 +40,9 @@ string toPolishNotation(const string commonExpression) {
 
     for (int i = 0; i < commonExpression.length(); i++) {
         char ch = commonExpression[i];
-        if (isdigit(ch)) {  //Операнд (цифра)
+        if (isdigit(ch) || ch == '.') {  //Операнд (цифра)
             PolishNotation += ch;
-            if (i != commonExpression.length() - 1 && !isdigit(commonExpression[i + 1])) { // Для пробела между числами
+            if (i != commonExpression.length() - 1 && !isdigit(commonExpression[i + 1]) && commonExpression[i + 1] != '.') { // Для пробела между числами
                 PolishNotation += " ";
             }
         }
@@ -102,7 +102,7 @@ float calculatePolishNotation(string PolishNotation) {
                 number = "";
             }
         }
-        else if (isdigit(ch)) {  //Для чисел
+        else if (isdigit(ch) || ch == '.') {  //Для чисел
             number += ch;
         }
         else {  //Для операций
